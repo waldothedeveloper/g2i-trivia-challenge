@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, { Suspense, lazy } from "react";
+import { Loader } from "./components/loader";
+import { ProvideQuiz } from "./context/useProvideQuiz";
+
+const Home = lazy(() => import("./components/home"));
+const QuizScreen = lazy(() => import("./components/quiz-screen"));
+const FinalScore = lazy(() => import("./components/finalScore"));
 
 function App() {
+  //
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Suspense fallback={<Loader />}>
+        <Switch>
+          <ProvideQuiz>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/quiz" component={QuizScreen} />
+            <Route exact path="/final-score" component={FinalScore} />
+          </ProvideQuiz>
+        </Switch>
+      </Suspense>
+    </Router>
   );
 }
 
