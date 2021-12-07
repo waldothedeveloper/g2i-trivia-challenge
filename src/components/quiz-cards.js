@@ -26,7 +26,7 @@ const QuizCards = () => {
 
         <div className="mt-12 flex items-center justify-evenly">
           {/* button for true answers */}
-          <VotingButton bool={true} fn={submitAnswer} counter={data[counter]} />
+          <VotingButton bool fn={submitAnswer} counter={data[counter]} />
           {/* button for false answers */}
           <VotingButton
             bool={false}
